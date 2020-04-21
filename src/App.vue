@@ -13,35 +13,60 @@
           <v-list-item-content>
             <v-list-item-title>{{ sub.nombre }}</v-list-item-title>
           </v-list-item-content>
-          <v-list-item-icon
-            ><v-icon>mdi-arrow-right-drop-circle</v-icon></v-list-item-icon
-          >
-        </v-list-item></v-list
-      >
+          <v-list-item-icon>
+            <v-icon>mdi-arrow-right-drop-circle</v-icon>
+          </v-list-item-icon>
+        </v-list-item>
+      </v-list>
       <v-divider></v-divider>
       <v-list-item
         to="/reports"
         v-if="minusc($store.state.user.cargo) == 'jefe de recursos humanos'"
       >
         <v-list-item-content>
-          <v-list-item-title><h3>Reporte</h3></v-list-item-title>
+          <v-list-item-title>
+            <h3>Reporte</h3>
+          </v-list-item-title>
         </v-list-item-content>
-        <v-list-item-icon><v-icon>mdi-pie-chart</v-icon></v-list-item-icon>
+        <v-list-item-icon>
+          <v-icon>mdi-chart-bar</v-icon>
+        </v-list-item-icon>
+      </v-list-item>
+      <v-list-item
+        to="/config"
+        v-if="minusc($store.state.user.cargo) == 'jefe de recursos humanos'"
+      >
+        <v-list-item-content>
+          <v-list-item-title>
+            <h3>Configuración</h3>
+          </v-list-item-title>
+        </v-list-item-content>
+        <v-list-item-icon>
+          <v-icon>mdi-cogs</v-icon>
+        </v-list-item-icon>
       </v-list-item>
       <v-list-item @click="logout()" v-if="$store.state.user.id > 0">
         <v-list-item-content>
-          <v-list-item-title><h3>Salir</h3></v-list-item-title>
+          <v-list-item-title>
+            <h3>Salir</h3>
+          </v-list-item-title>
         </v-list-item-content>
-        <v-list-item-icon><v-icon>mdi-exit-to-app</v-icon></v-list-item-icon>
+        <v-list-item-icon>
+          <v-icon>mdi-exit-to-app</v-icon>
+        </v-list-item-icon>
       </v-list-item>
     </v-navigation-drawer>
     <v-app-bar clipped-left app>
-      <v-toolbar-title><h2>Programa de vacaciones</h2></v-toolbar-title>
+      <v-toolbar-title>
+        <h2>Programa de vacaciones</h2>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
 
       <div>Fecha: {{ fecha }}</div>
     </v-app-bar>
-    <v-content><router-view></router-view> </v-content>
+    <v-content>
+      <router-view></router-view>
+    </v-content>
   </v-app>
 </template>
 

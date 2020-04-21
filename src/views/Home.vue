@@ -1,9 +1,11 @@
+
 <template>
   <v-layout pa-10>
     <v-dialog v-model="dlg" width="800">
       <v-card>
         <v-card-title class="blue-grey lighten-5">
-          Registrar salida de vacaciones<v-spacer></v-spacer>
+          Registrar salida de vacaciones
+          <v-spacer></v-spacer>
           <v-menu open-on-hover offset-y left>
             <template v-slot:activator="{ on }">
               <v-btn color="success" dark v-on="on" fab small class="mr-2">
@@ -22,20 +24,14 @@
               </p>
             </div>
           </v-menu>
-          <v-btn fab dark top right small color="error" @click="dlg = false"
-            ><v-icon>mdi-close</v-icon></v-btn
-          ></v-card-title
-        >
+          <v-btn fab dark top right small color="error" @click="dlg = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-card-title>
         <v-divider></v-divider>
-        <v-card-text
-          ><v-layout row pa-3>
-            <v-date-picker
-              v-model="dtpick"
-              reactive
-              range
-              locale="es-ni"
-              no-title
-            ></v-date-picker>
+        <v-card-text>
+          <v-layout row pa-3>
+            <v-date-picker v-model="dtpick" reactive range locale="es-ni" no-title></v-date-picker>
             <table class="detalle" height="380">
               <tr>
                 <td>Días acumulados:</td>
@@ -55,9 +51,7 @@
               </tr>
               <tr>
                 <td>Fecha de salida:</td>
-                <td>
-                  {{ fechaEspañol(new Date(salida)) }}
-                </td>
+                <td>{{ fechaEspañol(new Date(salida)) }}</td>
               </tr>
               <tr>
                 <td>Detalle de días:</td>
@@ -66,71 +60,63 @@
               <tr>
                 <td>Observación:</td>
                 <td>
-                  <textarea
-                    v-model="observación"
-                    placeholder="Opcional"
-                  ></textarea>
+                  <textarea v-model="observación" placeholder="Opcional"></textarea>
                 </td>
-              </tr></table
-          ></v-layout>
+              </tr>
+            </table>
+          </v-layout>
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions class="blue-grey lighten-5">
           <v-spacer></v-spacer>
-          <v-btn color="primary" fab dark @click="save()" v-if="validar"
-            ><v-icon large>mdi-content-save</v-icon></v-btn
-          >
-          <v-btn v-else fab dark color="grey"
-            ><v-icon large>mdi-content-save</v-icon></v-btn
-          >
+          <v-btn color="primary" fab dark @click="save()" v-if="validar">
+            <v-icon large>mdi-content-save</v-icon>
+          </v-btn>
+          <v-btn v-else fab dark color="grey">
+            <v-icon large>mdi-content-save</v-icon>
+          </v-btn>
           <v-spacer></v-spacer>
-        </v-card-actions> </v-card
-    ></v-dialog>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <v-card width="800" v-if="$store.state.selected.id > 0">
       <v-card-title>
         {{ $store.state.selected.nombre }}
         <v-layout top right>
           <v-spacer></v-spacer>
-          <v-btn fab dark small color="success" @click="dlg = true"
-            ><v-icon>mdi-plus</v-icon></v-btn
-          ><v-btn
-            fab
-            dark
-            small
-            color="error"
-            class="ml-2"
-            @click="$store.state.selected.id = 0"
-            ><v-icon>mdi-close</v-icon></v-btn
-          >
+          <v-btn fab dark small color="success" @click="dlg = true">
+            <v-icon>mdi-plus</v-icon>
+          </v-btn>
+          <v-btn fab dark small color="error" class="ml-2" @click="$store.state.selected.id = 0">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
         </v-layout>
       </v-card-title>
-      <v-card-text
-        ><v-simple-table height="400" dense>
+      <v-card-text>
+        <v-simple-table height="400" dense>
           <template v-slot:default>
             <thead>
               <tr>
-                <th v-for="col in items" :key="col">
-                  {{ col }}
-                </th>
+                <th v-for="col in items" :key="col">{{ col }}</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="f in $store.state.selected.salidas" :key="f.id">
                 <td v-for="cell in items" :key="cell">
                   {{
-                    f[cell].toString().indexOf("Date(") >= 0
-                      ? new Date(
-                          parseInt(
-                            f[cell].replace(")/", "").replace("/Date(", "")
-                          )
-                        ).toLocaleDateString()
-                      : f[cell]
+                  f[cell].toString().indexOf("Date(") >= 0
+                  ? new Date(
+                  parseInt(
+                  f[cell].replace(")/", "").replace("/Date(", "")
+                  )
+                  ).toLocaleDateString()
+                  : f[cell]
                   }}
                 </td>
                 <td>
-                  <v-btn small icon @click="borrar(f.id)" v-if="f.id > 0"
-                    ><v-icon small color="red">mdi-close-circle</v-icon></v-btn
-                  >
+                  <v-btn small icon @click="borrar(f.id)" v-if="f.id > 0">
+                    <v-icon small color="red">mdi-close-circle</v-icon>
+                  </v-btn>
                 </td>
               </tr>
             </tbody>
@@ -141,12 +127,13 @@
     <v-dialog width="800" v-model="dlgPdf">
       <v-card>
         <v-card-title>
-          <v-layout row
-            >Vista previa<v-spacer></v-spacer
-            ><v-btn fab @click="dlgPdf = false"
-              ><v-icon>mdi-close</v-icon></v-btn
-            ></v-layout
-          >
+          <v-layout row>
+            Vista previa
+            <v-spacer></v-spacer>
+            <v-btn fab @click="dlgPdf = false">
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+          </v-layout>
         </v-card-title>
         <v-card-text>
           <iframe :src="pdf" frameborder="1" width="100%" height="600"></iframe>
@@ -156,6 +143,7 @@
   </v-layout>
 </template>
 <script>
+/* eslint-disable no-console */
 import jsPDF from "jspdf";
 import { ajax } from "jquery";
 export default {
@@ -177,20 +165,6 @@ export default {
         "jueves",
         "viernes",
         "sábado"
-      ],
-      meses: [
-        "Enero",
-        "Febrero",
-        "Marzo",
-        "Abril",
-        "Mayo",
-        "Junio",
-        "Julio",
-        "Agosto",
-        "Septiembre",
-        "Octubre",
-        "Noviembre",
-        "Diciembre"
       ]
     };
   },
@@ -349,9 +323,33 @@ export default {
           });
         }
       });
+    },
+    numHollyDays: function(fechas) {
+      var result = 0;
+      var mv = this;
+      fechas.forEach(f => {
+        var miFecha = Date.parse(f);
+        mv.$store.state.feriados.forEach(df => {
+          if (
+            new Date(df).toLocaleDateString() ==
+            new Date(miFecha).toLocaleDateString()
+          ) {
+            result += 1;
+          }
+        });
+      });
+      return result;
     }
   },
   computed: {
+    meses: function() {
+      var mv = this;
+      var result = [];
+      mv.$store.state.meses.forEach(m => {
+        result.push(m.text);
+      });
+      return result;
+    },
     items: function() {
       return Object.keys(this.$store.state.selected.salidas[0]).filter(it => {
         return it != "empleado" && it != "id" && it != "timestamp";
@@ -392,7 +390,7 @@ export default {
     },
     solicitados: function() {
       var mv = this;
-      var result = 0;
+      var result = 1;
       if (mv.dtpick.length > 1) {
         mv.dtpick = mv.dtpick.sort();
         mv.intervalos = Object.assign([], mv.dtpick);
@@ -410,14 +408,12 @@ export default {
           mv.intervalos.push(newD);
         }
         mv.intervalos = mv.intervalos.sort();
+        var feriados = mv.numHollyDays(mv.intervalos);
+        console.log(feriados);
         mv.intervalos.forEach(d => {
           var myD = new Date(d);
-          if (dif + 1 >= 7) {
-            if (myD.getDay() != 5) {
-              result += 1;
-            } else {
-              result += 0.5;
-            }
+          if (dif + 1 - feriados >= 7) {
+            result += 1;
           } else {
             if (myD.getDay() != 6) {
               if (myD.getDay() != 5) {
@@ -444,6 +440,10 @@ export default {
         } else {
           result = 1;
         }
+      }
+      result -= feriados;
+      if (isNaN(result)) {
+        result = 0;
       }
       return result.toString();
     },
@@ -521,6 +521,7 @@ export default {
       this.$router.push("login");
       return;
     }
+    this.$store.dispatch("getHollyDays");
   }
 };
 </script>

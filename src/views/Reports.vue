@@ -1,14 +1,12 @@
 <template>
   <v-app>
-    <v-container
-      v-if="minusc($store.state.user.cargo) == 'jefe de recursos humanos'"
-    >
+    <v-container v-if="minusc($store.state.user.cargo) == 'jefe de recursos humanos'">
       <v-card width="900">
         <v-card-title class="blue-grey lighten-5 pt-0 pb-0">
-          <v-flex row pa-2 pb-0
-            ><div class="mt-0 mb-0">Resumen de vacaciones</div>
-            <v-spacer></v-spacer
-            ><v-text-field
+          <v-flex row pa-2 pb-0>
+            <div class="mt-0 mb-0">Resumen de vacaciones</div>
+            <v-spacer></v-spacer>
+            <v-text-field
               v-model="search"
               label="Buscar..."
               prepend-inner-icon="mdi-magnify"
@@ -22,13 +20,13 @@
               name="resumen_de_vacaciones.xls"
               :title="`Resumen de vacaciones al ${$store.state.fecha}`"
             >
-              <v-btn small icon
-                ><v-icon color="green">mdi-file-excel</v-icon></v-btn
-              > </download-excel
-            >&nbsp;
-            <v-btn icon small @click="$router.push('home')" class="mt-1"
-              ><v-icon color="red">mdi-close-circle</v-icon></v-btn
-            >
+              <v-btn small icon>
+                <v-icon color="green">mdi-file-excel</v-icon>
+              </v-btn>
+            </download-excel>&nbsp;
+            <v-btn icon small @click="$router.push('home')" class="mt-1">
+              <v-icon color="red">mdi-close-circle</v-icon>
+            </v-btn>
           </v-flex>
         </v-card-title>
         <v-divider></v-divider>
@@ -48,9 +46,7 @@
                   <td>{{ item.nombre }}</td>
                   <td>{{ item.cargo }}</td>
                   <td>{{ item.sucursal }}</td>
-                  <td style="text-align:right">
-                    {{ item.pendiente }}
-                  </td>
+                  <td style="text-align:right">{{ item.pendiente }}</td>
                 </tr>
               </tbody>
             </template>
@@ -60,12 +56,13 @@
     </v-container>
     <v-container pa-5 v-else>
       <v-card width="500">
-        <v-card-title
-          >No tiene acceso a esta función<v-spacer></v-spacer
-          ><v-btn small icon @click="$router.push('login')"
-            ><v-icon color="red">mdi-close-circle</v-icon></v-btn
-          ></v-card-title
-        >
+        <v-card-title>
+          No tiene acceso a esta función
+          <v-spacer></v-spacer>
+          <v-btn small icon @click="$router.push('login')">
+            <v-icon color="red">mdi-close-circle</v-icon>
+          </v-btn>
+        </v-card-title>
         <v-card-text>
           <v-icon large color="orange">mdi-information</v-icon>Esta función solo
           le está permitida al jefe de recursos humanos.

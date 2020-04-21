@@ -2,9 +2,7 @@
   <v-layout row wrap class="justify-center" pa-5>
     <form @submit.prevent="login()">
       <v-card width="450">
-        <v-card-title class="blue-grey lighten-5">
-          Identifícate
-        </v-card-title>
+        <v-card-title class="blue-grey lighten-5">Identifícate</v-card-title>
         <v-card-text>
           <v-text-field
             label="Usuario o correo:"
